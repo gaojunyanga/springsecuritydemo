@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.glls.order.mapper.OrderMapper" >
+
+  <insert id="addOrder">
+    insert into t_order (orderId,userId,orderDate,productId,productNum)
+    values (null,#{userId},now(),#{productId},#{productNum})
+  </insert>
+
+  <select id="findOrderById" resultType="com.glls.common.entity.Order" flushCache="true">
+    select * from t_order where orderId = #{orderId}
+  </select>
+</mapper>
