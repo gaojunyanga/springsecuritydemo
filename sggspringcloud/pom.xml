@@ -9,6 +9,8 @@
         <module>04-gateway</module>
         <module>05-order</module>
         <module>01-common</module>
+        <module>06-stock</module>
+        <module>07-account</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
