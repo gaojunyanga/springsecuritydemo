@@ -8,6 +8,7 @@ import com.glls.order.mapper.OrderMapper;
 import com.glls.order.mapper.StockMapper;
 import com.glls.order.service.OrderService;
 import com.glls.order.service.StockService;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -166,6 +167,7 @@ public class OrderServiceImpl implements OrderService {
 
 
     @Override
+    @GlobalTransactional
     @Transactional(propagation = Propagation.REQUIRED)
     public int addOrder2(Order order) {
         // 添加订单

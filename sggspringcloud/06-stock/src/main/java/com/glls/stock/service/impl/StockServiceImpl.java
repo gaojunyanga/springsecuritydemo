@@ -14,7 +14,7 @@ public class StockServiceImpl implements StockService {
     private StockMapper stockMapper;
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional(propagation = Propagation.REQUIRED)
     public int updateStock(Order order) {
         //int i = 5/0;
         return stockMapper.updateStock(order);

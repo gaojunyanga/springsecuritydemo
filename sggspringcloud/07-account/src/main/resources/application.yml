@@ -22,8 +22,21 @@ mybatis:
     map-underscore-to-camel-case: true # 驼峰命名规范
   mapper-locations: classpath:mapper/*.xml    # mapper映射文件位置
 
+
+
+
 # 输出 sql 日志
 logging:
   level:
-    com.glls.order.mapper: DEBUG
-
+    com.glls.account.mapper: DEBUG
+seata:
+  application-id: ${spring.application.name}
+  tx-service-group: ${spring.application.name}-group
+#  registry:
+#    nacos:
+#      server-addr: 127.0.0.1:8848
+#      application: seata-server
+#    type: nacos
+  service:
+    vgroup-mapping:
+      account-group: default

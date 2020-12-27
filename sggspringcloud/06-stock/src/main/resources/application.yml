@@ -1,5 +1,5 @@
 server:
-  port: 10000
+  port: 10008
 spring:
 
   datasource: # 数据库配置
@@ -25,5 +25,17 @@ mybatis:
 # 输出 sql 日志
 logging:
   level:
-    com.glls.order.mapper: DEBUG
+    com.glls.stock.mapper: DEBUG
 
+seata:
+  application-id: ${spring.application.name}
+  tx-service-group: ${spring.application.name}-group
+#  registry:
+#    nacos:
+#      server-addr: 127.0.0.1:8848
+#      application: seata-server
+#      group: SEATA_GROUP
+#    type: nacos
+  service:
+    vgroup-mapping:
+      stock-group: default

@@ -18,7 +18,7 @@ public class AccountController {
 
 
     @RequestMapping(value = "/updateAccount",method = RequestMethod.POST)
-    Integer updateStock(@RequestBody Order order){
+    Integer updateAccount(@RequestBody Order order){
         return accountService.updateAccount(order);
     }
 }

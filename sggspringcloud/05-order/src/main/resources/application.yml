@@ -27,3 +27,17 @@ logging:
   level:
     com.glls.order.mapper: DEBUG
 
+seata:
+  application-id: ${spring.application.name}
+  tx-service-group: ${spring.application.name}-group
+#  registry:
+#    nacos:
+#      server-addr: 127.0.0.1:8848
+#      application: seata-server
+#      group: SEATA_GROUP
+#    type: nacos
+  service:
+    vgroup-mapping:
+      order-group: default
+
+
