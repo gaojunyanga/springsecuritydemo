@@ -9,4 +9,5 @@ public interface OrderService {
 
     void readManyTimes(Integer orderId);
 
+    int addOrder2(Order order);
 }

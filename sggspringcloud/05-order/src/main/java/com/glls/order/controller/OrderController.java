@@ -31,8 +31,22 @@ public class OrderController {
 
     @RequestMapping("/iso")
     public String isolation(Integer orderId){
+        // 演示 事务 隔离界别
         orderService.readManyTimes(orderId);
         return "ok";
     }
+
+
+    @RequestMapping("/tran2")
+    public String distributedTran(Order order) throws SQLException {
+       // 分布式事务
+        // 下订单  扣库存  减账户
+        int result = orderService.addOrder2(order);
+        if(result==1){
+            return "下单成功";
+        }
+        return "下单失败";
+    }
+
 
 }

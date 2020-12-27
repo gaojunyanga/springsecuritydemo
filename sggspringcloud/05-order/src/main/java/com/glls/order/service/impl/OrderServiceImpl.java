@@ -1,6 +1,8 @@
 package com.glls.order.service.impl;
 
 import com.glls.common.entity.Order;
+import com.glls.order.feign.AccountFeignService;
+import com.glls.order.feign.StockFeignService;
 import com.glls.order.mapper.AccountMapper;
 import com.glls.order.mapper.OrderMapper;
 import com.glls.order.mapper.StockMapper;
@@ -66,8 +68,8 @@ public class OrderServiceImpl implements OrderService {
         //for(int i=0;i<2;i++){
              //获取代理对象
             int result2 = o.updateStock(order);
-             result2 = o.updateStock(order);
-            //o.updateAccount(order);
+            // result2 = o.updateStock(order);
+
         //}
 
         //---- 规范  是 service 之间 互相调用  service 不要直接调用 别的 dao 比如直接 调 stock 的 mapper
@@ -76,7 +78,7 @@ public class OrderServiceImpl implements OrderService {
         }*/
 
         // 扣减账户
-
+        o.updateAccount(order);
         return result;
     }
 
@@ -145,16 +147,37 @@ public class OrderServiceImpl implements OrderService {
     //@Transactional(isolation = Isolation.READ_COMMITTED)   // 存在 不可重复读问题
     public void readManyTimes(Integer orderId) {
         Order order = orderMapper.findOrderById(orderId);
-
+        //在这里 打断点   去数据库 修改这条数据
         System.out.println(order);
 
 
         System.out.println("----------");
-
+        // 对比 和上面读到的数据是个否一致   记得去除mybatis 的 查询缓存设置 在配置文件 加 flushCache="true"
         Order order2 = orderMapper.findOrderById(orderId);
 
         System.out.println(order);
 
+    }
+
+    @Autowired
+    private StockFeignService stockFeignService;
+    @Autowired
+    private AccountFeignService accountFeignService;
+
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public int addOrder2(Order order) {
+        // 添加订单
+        int result = orderMapper.addOrder(order);
+
+        // 扣减库存
+        Integer result2 = stockFeignService.updateStock(order);
+
+        // 扣减账户
+        Integer result3 = accountFeignService.updateAccount(order);
+
+        return result3;
     }
 
 
