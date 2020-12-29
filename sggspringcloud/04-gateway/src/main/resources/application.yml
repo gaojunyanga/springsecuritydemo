@@ -3,6 +3,10 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8333
+
     gateway:
       routes:
         - id: test_route
@@ -13,6 +17,21 @@ spring:
           uri: http://www.jd.com
           predicates:
             - Query=url,jd.
+
+
+        - id: order_route
+          uri: lb://order
+          predicates:
+            - Query=url,order
+
 server:
   port: 88
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"      # 暴露所有端口
+feign:
+  sentinel:
+    enabled: true

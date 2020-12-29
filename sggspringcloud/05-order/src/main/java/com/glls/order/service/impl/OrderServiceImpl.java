@@ -2,6 +2,7 @@ package com.glls.order.service.impl;
 
 import com.alibaba.csp.sentinel.Entry;
 import com.alibaba.csp.sentinel.SphU;
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.glls.common.entity.Order;
 import com.glls.order.feign.AccountFeignService;
@@ -198,7 +199,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public String test4(String test) {
+    @SentinelResource(value = "test4Resource",blockHandler ="blockHandlerForTest4")
+    public String test4(String test) throws BlockException {
 
         // 资源名可使用任意有业务语义的字符串，比如方法名、接口名或其它可唯一标识的字符串。
         try (Entry entry = SphU.entry("resourceName")) {
@@ -219,6 +221,11 @@ public class OrderServiceImpl implements OrderService {
         }
 
         return "other";
+    }
+
+    public String blockHandlerForTest4(String test,BlockException ex) throws BlockException {
+        log.error("test4被限流了："+ex.toString());
+        return "blockHandlerForTest4";
     }
 
 

@@ -1,5 +1,6 @@
 package com.glls.order.controller;
 
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.glls.common.entity.Order;
 import com.glls.order.service.OrderService;
 import org.springframework.aop.support.AopUtils;
@@ -75,7 +76,7 @@ public class OrderController {
     }
 
     @RequestMapping("/test4")
-    public String test4(String test){
+    public String test4(String test) throws BlockException {
       return   orderService.test4(test);
     }
 
