@@ -21,4 +21,11 @@ public class AccountController {
     Integer updateAccount(@RequestBody Order order){
         return accountService.updateAccount(order);
     }
+
+
+    @RequestMapping(value = "/testAccount",method = RequestMethod.GET)
+    String testAccount(){
+        return "testAccount";
+    }
+
 }

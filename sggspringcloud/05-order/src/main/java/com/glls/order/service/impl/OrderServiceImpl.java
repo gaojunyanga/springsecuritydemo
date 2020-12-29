@@ -1,23 +1,28 @@
 package com.glls.order.service.impl;
 
+import com.alibaba.csp.sentinel.Entry;
+import com.alibaba.csp.sentinel.SphU;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.glls.common.entity.Order;
 import com.glls.order.feign.AccountFeignService;
 import com.glls.order.feign.StockFeignService;
 import com.glls.order.mapper.AccountMapper;
 import com.glls.order.mapper.OrderMapper;
 import com.glls.order.mapper.StockMapper;
+import com.glls.order.service.AccountService;
 import com.glls.order.service.OrderService;
 import com.glls.order.service.StockService;
 import io.seata.spring.annotation.GlobalTransactional;
-import org.springframework.aop.framework.AopContext;
-import org.springframework.aop.support.AopUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service("orderService")
+@Slf4j
 public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderMapper orderMapper;
@@ -29,6 +34,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private StockService stockService;
+    @Autowired
+    private AccountService accountService;
 
 
     @Override
@@ -60,26 +67,25 @@ public class OrderServiceImpl implements OrderService {
 //        }
 
         // ---本类 事务方法互调生效   使用aspectj
-         OrderServiceImpl o = (OrderServiceImpl) AopContext.currentProxy();
+        // OrderServiceImpl o = (OrderServiceImpl) AopContext.currentProxy();
 //
-        System.out.println(AopUtils.isCglibProxy(o));
+       /* System.out.println(AopUtils.isCglibProxy(o));
         System.out.println(AopUtils.isJdkDynamicProxy(o));
-        System.out.println(AopUtils.isAopProxy(o));
+        System.out.println(AopUtils.isAopProxy(o));*/
 
         //for(int i=0;i<2;i++){
              //获取代理对象
-            int result2 = o.updateStock(order);
+            //int result2 = o.updateStock(order);
             // result2 = o.updateStock(order);
 
         //}
 
         //---- 规范  是 service 之间 互相调用  service 不要直接调用 别的 dao 比如直接 调 stock 的 mapper
-       /* for(int i=0;i<2;i++){
             int result2 = stockService.updateStock(order);
-        }*/
 
         // 扣减账户
-        o.updateAccount(order);
+       // o.updateAccount(order);
+        int result3 = accountService.updateAccount(order);
         return result;
     }
 
@@ -146,7 +152,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional(isolation = Isolation.REPEATABLE_READ)    // 避免 不可重复度问题
     //@Transactional(isolation = Isolation.READ_COMMITTED)   // 存在 不可重复读问题
-    public void readManyTimes(Integer orderId) {
+    public Order readManyTimes(Integer orderId) {
         Order order = orderMapper.findOrderById(orderId);
         //在这里 打断点   去数据库 修改这条数据
         System.out.println(order);
@@ -158,13 +164,22 @@ public class OrderServiceImpl implements OrderService {
 
         System.out.println(order);
 
+        return order;
     }
 
+
+
+    @Qualifier("stock")
     @Autowired
     private StockFeignService stockFeignService;
+
+
+
+
+
+    @Qualifier("account")
     @Autowired
     private AccountFeignService accountFeignService;
-
 
     @Override
     @GlobalTransactional
@@ -180,6 +195,30 @@ public class OrderServiceImpl implements OrderService {
         Integer result3 = accountFeignService.updateAccount(order);
 
         return result3;
+    }
+
+    @Override
+    public String test4(String test) {
+
+        // 资源名可使用任意有业务语义的字符串，比如方法名、接口名或其它可唯一标识的字符串。
+        try (Entry entry = SphU.entry("resourceName")) {
+            // 被保护的业务逻辑
+            // do something here...
+            if(test.equals("stock")){
+                return stockFeignService.testStock();
+            }else if(test.equals("account")){
+
+                return accountFeignService.testAccount();
+            }else{
+                return "other";
+            }
+        } catch (BlockException ex) {
+            // 资源访问阻止，被限流或被降级
+            // 在此处进行相应的处理操作
+            log.error("资源被限流");
+        }
+
+        return "other";
     }
 
 

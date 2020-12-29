@@ -18,4 +18,18 @@ public class StockController {
     Integer updateStock(@RequestBody Order order){
         return stockService.updateStock(order);
     }
+
+
+    @RequestMapping(value = "/testStock",method = RequestMethod.GET)
+    String testStock(){
+
+        try {
+            Thread.sleep(300);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return "testStock";
+    }
+
 }

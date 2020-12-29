@@ -7,7 +7,10 @@ import java.sql.SQLException;
 public interface OrderService {
     int addOrder(Order order) throws SQLException;
 
-    void readManyTimes(Integer orderId);
+    Order readManyTimes(Integer orderId);
 
     int addOrder2(Order order);
+
+    String test4(String test);
+
 }

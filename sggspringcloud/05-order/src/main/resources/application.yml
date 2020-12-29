@@ -15,6 +15,12 @@ spring:
       discovery:
         server-addr: 127.0.0.1:8848
 
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: localhost:8333
+
+
 mybatis:
   # 指定别名设置的包为所有entity
   type-aliases-package: com.glls.springbootdemo1.pojo
@@ -25,7 +31,7 @@ mybatis:
 # 输出 sql 日志
 logging:
   level:
-    com.glls.order.mapper: DEBUG
+    com.glls.order: info
 
 seata:
   application-id: ${spring.application.name}
@@ -39,5 +45,18 @@ seata:
   service:
     vgroup-mapping:
       order-group: default
+
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"      # 暴露所有端口
+feign:
+  sentinel:
+    enabled: true
+
+
 
 

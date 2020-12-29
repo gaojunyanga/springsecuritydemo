@@ -12,6 +12,7 @@ import java.sql.SQLException;
 @RestController
 @RequestMapping("/order")
 public class OrderController {
+
     @Autowired
     private OrderService orderService;
 
@@ -30,10 +31,10 @@ public class OrderController {
 
 
     @RequestMapping("/iso")
-    public String isolation(Integer orderId){
+    public Order isolation(Integer orderId){
         // 演示 事务 隔离界别
-        orderService.readManyTimes(orderId);
-        return "ok";
+        Order order = orderService.readManyTimes(orderId);
+        return order;
     }
 
 
@@ -48,5 +49,34 @@ public class OrderController {
         return "下单失败";
     }
 
+
+    @RequestMapping("/test1")
+    public String test1(){
+        return "----this is test1";
+    }
+
+    @RequestMapping("/test2")
+    public String test2(){
+        return "----this is test2";
+    }
+
+    /**
+     * 演示 阈值类型 线程数
+     * */
+    @RequestMapping("/test3")
+    public String test3(){
+
+        try {
+            Thread.sleep(800);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return "----this is test3";
+    }
+
+    @RequestMapping("/test4")
+    public String test4(String test){
+      return   orderService.test4(test);
+    }
 
 }
