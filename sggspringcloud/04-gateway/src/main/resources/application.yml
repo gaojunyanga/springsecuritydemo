@@ -18,11 +18,25 @@ spring:
           predicates:
             - Query=url,jd.
 
-
         - id: order_route
           uri: lb://order
           predicates:
             - Query=url,order
+
+        - id: account_route
+          uri: lb://account
+          predicates:
+            - Path=/account/**
+          filters:
+            - RewritePath=/account/(?<segment>.*), /$\{segment}
+
+        - id: order_route2
+          uri: lb://order
+          predicates:
+            - Path=/order/**
+          filters:
+            - RewritePath=/order/(?<segment>.*), /$\{segment}
+
 
 server:
   port: 88
