@@ -1,3 +1,8 @@
 .idea
 .mvn
 *.iml
+/yygh/yygh_parent/model/*.iml
+/yygh/yygh_parent/common/*.iml
+/yygh/yygh_parent/common/service_util/*.iml
+/yygh/yygh_parent/common/common_util/*.iml
+/JVMDemo/out
