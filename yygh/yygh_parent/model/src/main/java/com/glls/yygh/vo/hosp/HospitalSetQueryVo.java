@@ -1,4 +1,4 @@
-package com.atguigu.yygh.vo.hosp;
+package com.glls.yygh.vo.hosp;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModelProperty;

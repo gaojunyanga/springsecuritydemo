@@ -1,4 +1,4 @@
-package com.atguigu.yygh.enums;
+package com.glls.yygh.enums;
 
 public enum AuthStatusEnum {
 

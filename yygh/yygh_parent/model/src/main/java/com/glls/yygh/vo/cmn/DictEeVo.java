@@ -1,4 +1,4 @@
-package com.atguigu.yygh.vo.cmn;
+package com.glls.yygh.vo.cmn;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.metadata.BaseRowModel;

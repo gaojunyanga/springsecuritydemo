@@ -1,4 +1,4 @@
-package com.atguigu.yygh.model.base;
+package com.glls.yygh.model.base;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;

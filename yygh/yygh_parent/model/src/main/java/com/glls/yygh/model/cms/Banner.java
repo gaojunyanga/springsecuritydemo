@@ -1,8 +1,8 @@
-package com.atguigu.yygh.model.cms;
+package com.glls.yygh.model.cms;
 
-import com.atguigu.yygh.model.base.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.glls.yygh.model.base.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

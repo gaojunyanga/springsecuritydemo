@@ -1,4 +1,4 @@
-package com.atguigu.yygh.vo.acl;
+package com.glls.yygh.vo.acl;
 
 import lombok.Data;
 

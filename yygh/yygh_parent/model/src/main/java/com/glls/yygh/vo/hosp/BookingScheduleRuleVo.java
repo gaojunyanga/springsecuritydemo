@@ -1,6 +1,6 @@
-package com.atguigu.yygh.vo.hosp;
+package com.glls.yygh.vo.hosp;
 
-import com.atguigu.yygh.model.base.BaseEntity;
+import com.glls.yygh.model.base.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;

@@ -1,9 +1,7 @@
-package com.atguigu.yygh.model.hosp;
+package com.glls.yygh.model.hosp;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.atguigu.yygh.model.base.BaseEntity;
-import com.atguigu.yygh.model.base.BaseMongoEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;

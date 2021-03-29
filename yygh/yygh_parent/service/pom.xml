@@ -11,17 +11,21 @@
 
     <groupId>com.glls.yygh</groupId>
     <artifactId>service</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>service_hosp</module>
+    </modules>
 
     <dependencies>
         <dependency>
-            <groupId>com.atguigu</groupId>
+            <groupId>com.glls.yygh</groupId>
             <artifactId>model</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.atguigu</groupId>
+            <groupId>com.glls.yygh</groupId>
             <artifactId>service_util</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <!--web-->
         <dependency>
@@ -50,10 +54,10 @@
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
         <!-- 服务注册 -->
-        <dependency>
+        <!--<dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
+        </dependency>-->
         <!-- 流量控制 -->
         <!-- <dependency>
              <groupId>com.alibaba.cloud</groupId>

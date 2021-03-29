@@ -1,4 +1,4 @@
-package com.atguigu.yygh.enums;
+package com.glls.yygh.enums;
 
 import java.util.ArrayList;
 import java.util.HashMap;
