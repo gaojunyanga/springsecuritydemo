@@ -1,0 +1,27 @@
+# 第一种
+#spring:
+#  security:
+#    user:
+#      name: glls
+#      password: 123456
+
+
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://127.0.0.1:3306/springsecurity?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl     #  查看sql输出日志
+  type-aliases-package: com.glls.mysecuritydemo1.pojo
+  mapper-locations: classpath:mapper/*.xml
+
+
+logging:
+  level:
+    com.glls: debug
