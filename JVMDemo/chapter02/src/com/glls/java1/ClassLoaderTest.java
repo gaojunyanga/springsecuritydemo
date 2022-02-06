@@ -5,6 +5,10 @@ package com.glls.java1;
  * @Author : glls
  * @Date: 2021/3/31 21:39
  * @Description :
+ *   引导类加载器  是 c/c++ 写的
+ *   扩展类加载器  是 java实现的
+ *   系统（应用）类加载器  是 java 实现的
+ *
  */
 public class ClassLoaderTest {
     public static void main(String[] args) {
