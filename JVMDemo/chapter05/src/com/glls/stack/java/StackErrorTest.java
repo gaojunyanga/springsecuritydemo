@@ -1,10 +1,10 @@
-package com.glls.stack;
+package com.glls.stack.java;
 
 /**
  * @ClassName : StackErrorTest
  * @Author : glls
  * @Date: 2021/4/7 19:18
- * @Description :   栈溢出异常  StackOverflowError
+ * @Description : 2  栈溢出异常  StackOverflowError
  *
  * 默认情况下 ：count 的值  是  11420 次左右
  *
